@@ -7,13 +7,11 @@ const App = () => {
   const [notes, setNotes] = useState([]);
 
   return (
-    <>
-      <div className="header">
-        <p>Notes</p>
-      </div>
+    <div className="main">
+      <p className="header">Notes</p>
+      <NoteForm notes={notes} setNotes={setNotes} />
       <Notes notes={notes} />
-      <NoteForm setNotes={setNotes} notes={notes} />
-    </>
+    </div>
   );
 };
 

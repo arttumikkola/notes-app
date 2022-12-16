@@ -2,10 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 1vw;
 }
 
 .btn,
-.input {
+.noteInput,
+.tagInput {
   margin: 0.4vw;
 }
 
@@ -21,7 +23,8 @@
   justify-content: center;
 }
 
-.input {
+.noteInput,
+.tagInput {
   width: 15vw;
 }
 
@@ -30,4 +33,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.note {
+  margin: 3vw;
+  width: 40vw;
+}
+
+.noteHeader {
+  font-size: 2vw;
+}
+
+.noteContent {
+  font-size: 1.5vw;
+}
+
+.noteDate {
+  font-size: 0.8vw;
+  margin-top: 1vw;
 }
