@@ -29,26 +29,33 @@
 }
 
 .header {
-  font-size: 5vw;
+  font-size: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .note {
-  margin: 3vw;
+  margin: 0.5asvw;
   width: 40vw;
 }
 
 .noteHeader {
-  font-size: 2vw;
+  font-size: 2rem;
+  width: 30vw;
 }
 
 .noteContent {
-  font-size: 1.5vw;
+  font-size: 1.5rem;
+  width: 30vw;
 }
 
 .noteDate {
-  font-size: 0.8vw;
+  font-size: 0.8rem;
   margin-top: 1vw;
+}
+
+.date {
+  display: flex;
+  justify-content: space-between;
 }
