@@ -21,7 +21,12 @@ const NoteForm = ({ notes, setNotes }) => {
 
   const addNote = (e) => {
     e.preventDefault();
+    if (noteInput === "" && tagInput === "") {
+      alert("Don't insert empty values");
+      return;
+    }
     const noteObject = {
+      id: Math.floor(Math.random() * 100000),
       content: noteInput,
       tag: tagInput,
       date: getDateAndTime(),
