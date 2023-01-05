@@ -1,25 +1,26 @@
-import { Panel } from "rsuite";
+import Note from "./Note";
 
-const Notes = ({ notes }) => {
+const Notes = ({ notes, setNotes, selectedTag }) => {
   if (notes.length < 1) {
     return (
       <div className="notes">
         <p>No added notes</p>
       </div>
     );
-  } else {
+  } else if (notes.length > 0 && selectedTag === "All") {
     return notes.map((note) => (
-      <div className="notes">
-        <Panel
-          className="note"
-          header={<b className="noteHeader">{note.tag}</b>}
-          bordered
-        >
-          <p className="noteContent">{note.content}</p>
-          <p className="noteDate">{note.date}</p>
-        </Panel>
+      <div className="notes" key={note.id}>
+        <Note note={note} notes={notes} setNotes={setNotes} />
       </div>
     ));
+  } else {
+    return notes
+      .filter((note) => note.tag === selectedTag && selectedTag !== "All")
+      .map((note) => (
+        <div className="notes" key={note.id}>
+          <Note note={note} notes={notes} setNotes={setNotes} />
+        </div>
+      ));
   }
 };
 
