@@ -61,10 +61,12 @@ const Note = ({ note, notes, setNotes }) => {
             <IconButton
               onClick={() => setEdit(true)}
               icon={<EditIcon />}
+              className="icon"
             ></IconButton>
             <IconButton
               onClick={() => deleteNote(note.id)}
               icon={<TrashIcon />}
+              className="icon"
             ></IconButton>
           </div>
         </div>
@@ -98,6 +100,7 @@ const Note = ({ note, notes, setNotes }) => {
             <IconButton
               onClick={() => editNote(note)}
               icon={<EditIcon />}
+              className="icon"
             ></IconButton>
           </div>
         </div>
