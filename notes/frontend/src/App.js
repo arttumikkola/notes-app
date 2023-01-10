@@ -1,11 +1,24 @@
 import "./App.css";
 import NoteForm from "./components/NoteForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Notes from "./components/Notes";
+import axios from "axios";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
   const [selectedTag, setSelectedTag] = useState("All");
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:8080/notes");
+        setNotes(data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetch();
+  }, []);
 
   return (
     <div className="main">
@@ -16,7 +29,12 @@ const App = () => {
         selectedTag={selectedTag}
         setSelectedTag={setSelectedTag}
       />
-      <Notes notes={notes} setNotes={setNotes} selectedTag={selectedTag} />
+      <Notes
+        notes={notes}
+        setNotes={setNotes}
+        selectedTag={selectedTag}
+        setSelectedTag={setSelectedTag}
+      />
     </div>
   );
 };

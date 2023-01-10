@@ -2,8 +2,9 @@ import { Panel, IconButton } from "rsuite";
 import EditIcon from "@rsuite/icons/Edit";
 import TrashIcon from "@rsuite/icons/Trash";
 import { useState } from "react";
+import axios from "axios";
 
-const Note = ({ note, notes, setNotes }) => {
+const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
   const [edit, setEdit] = useState(false);
   const [tagInput, setTagInput] = useState(note.tag);
   const [noteInput, setNoteInput] = useState(note.content);
@@ -28,23 +29,46 @@ const Note = ({ note, notes, setNotes }) => {
     const index = notes.findIndex((editable) => {
       return note.id === editable.id;
     });
-    const notes2 = [...notes];
-    notes2[index] = {
-      id: note.id,
-      content: noteInput,
-      tag: tagInput,
-      date: getDateAndTime(),
-    };
-    setNotes(notes2);
-    setEdit(false);
+    try {
+      axios.put(`http://localhost:8080/notes/${index}`, {
+        tag: tagInput,
+        content: noteInput,
+        date: getDateAndTime(),
+        id: note.id,
+      });
+      const notes2 = [...notes];
+      notes2[index] = {
+        id: note.id,
+        content: noteInput,
+        tag: tagInput,
+        date: getDateAndTime(),
+      };
+      setNotes(notes2);
+      setEdit(false);
+    } catch (err) {
+      console.error(err);
+      alert("Error updating the note");
+    }
   };
 
-  const deleteNote = (id) => {
-    setNotes(
-      notes.filter((note) => {
-        return note.id !== id;
-      })
-    );
+  const deleteNote = async (id) => {
+    if (window.confirm("Are you sure you want to delete this note?")) {
+      try {
+        setNotes(
+          notes.filter((note) => {
+            return note.id !== id;
+          })
+        );
+        await axios.delete(`http://localhost:8080/notes/${id}`).then(() => {
+          if (selectedTag !== "All") {
+            setSelectedTag("All");
+          }
+        });
+      } catch (err) {
+        console.error(err);
+        /* alert("Error deleting the note"); */
+      }
+    }
   };
 
   if (edit === false) {

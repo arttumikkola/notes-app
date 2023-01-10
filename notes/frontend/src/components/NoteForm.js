@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Button from "rsuite/Button";
-import { Dropdown, SelectPicker } from "rsuite";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { IconButton } from "rsuite";
 import DragableIcon from "@rsuite/icons/Dragable";
+import axios from "axios";
 import "../App.css";
 import "rsuite/dist/rsuite.min.css";
 
@@ -27,22 +27,40 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
     return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
   };
 
-  const addNote = (e) => {
+  const addNote = async (e) => {
     e.preventDefault();
-    if (noteInput === "" && tagInput === "") {
-      alert("Don't insert empty values");
-      return;
+    try {
+      if (noteInput === "" && tagInput === "") {
+        alert("Don't insert empty values");
+        return;
+      }
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      const result = await axios.post(
+        "http://localhost:8080/notes",
+        {
+          tag: tagInput,
+          content: noteInput,
+          date: getDateAndTime(),
+        },
+        { headers }
+      );
+      const id = result.data.insertId;
+      const noteObject = {
+        id: id,
+        tag: tagInput,
+        content: noteInput,
+        date: getDateAndTime(),
+      };
+      setNotes(notes.concat(noteObject));
+      setNoteInput("");
+      setTagInput("");
+      setSelectedTag("All");
+    } catch (err) {
+      console.error(err);
+      alert("Error adding the note");
     }
-    const noteObject = {
-      id: Math.floor(Math.random() * 100000),
-      content: noteInput,
-      tag: tagInput,
-      date: getDateAndTime(),
-    };
-    setNotes(notes.concat(noteObject));
-    setNoteInput("");
-    setTagInput("");
-    console.log(notes);
   };
 
   const sortNotesByDate = () => {
@@ -66,12 +84,20 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
   const DropdownItems = notes.map((note) => {
     if (!addedItems.has(note.tag)) {
       addedItems.add(note.tag);
-      return <MenuItem value={note.tag}>{note.tag}</MenuItem>;
+      return (
+        <MenuItem value={note.tag} key={note.id}>
+          {note.tag}
+        </MenuItem>
+      );
     }
     return null;
   });
 
-  const allItem = <MenuItem value="All">All</MenuItem>;
+  const allItem = (
+    <MenuItem value="All" key="all">
+      All
+    </MenuItem>
+  );
   DropdownItems.unshift(allItem);
 
   const TagDropdown = () => {

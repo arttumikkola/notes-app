@@ -1,6 +1,6 @@
 import Note from "./Note";
 
-const Notes = ({ notes, setNotes, selectedTag }) => {
+const Notes = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
   if (notes.length < 1) {
     return (
       <div className="notes">
@@ -18,7 +18,13 @@ const Notes = ({ notes, setNotes, selectedTag }) => {
       .filter((note) => note.tag === selectedTag && selectedTag !== "All")
       .map((note) => (
         <div className="notes" key={note.id}>
-          <Note note={note} notes={notes} setNotes={setNotes} />
+          <Note
+            note={note}
+            notes={notes}
+            setNotes={setNotes}
+            selectedTag={selectedTag}
+            setSelectedTag={setSelectedTag}
+          />
         </div>
       ));
   }
