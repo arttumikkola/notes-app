@@ -3,6 +3,7 @@ import EditIcon from "@rsuite/icons/Edit";
 import TrashIcon from "@rsuite/icons/Trash";
 import { useState } from "react";
 import axios from "axios";
+import moment from "moment";
 
 const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
   const [edit, setEdit] = useState(false);
@@ -19,6 +20,10 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
     const seconds = date.getSeconds();
 
     return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+  };
+
+  const formatDate = (date) => {
+    return moment(date).format("YYYY/MM/DD HH:mm:ss");
   };
 
   const editNote = (note) => {
@@ -80,7 +85,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
       >
         <p className="noteContent">{note.content}</p>
         <div className="date">
-          <p className="noteDate">{note.date}</p>
+          <p className="noteDate">{formatDate(note.date)}</p>
           <div>
             <IconButton
               onClick={() => setEdit(true)}
@@ -119,7 +124,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
           onChange={(e) => setNoteInput(e.target.value)}
         />
         <div className="date">
-          <p className="noteDate">{note.date}</p>
+          <p className="noteDate">{formatDate(note.date)}</p>
           <div>
             <IconButton
               onClick={() => editNote(note)}
