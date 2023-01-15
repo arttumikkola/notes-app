@@ -11,7 +11,9 @@ const App = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8080/notes");
+        const { data } = await axios.get(
+          "notes-db.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com/notes"
+        );
         setNotes(data);
       } catch (e) {
         console.log(e);

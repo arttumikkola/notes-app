@@ -34,17 +34,13 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
         alert("Don't insert empty values");
         return;
       }
-      const headers = {
-        "Content-Type": "application/json",
-      };
       const result = await axios.post(
-        "http://localhost:8080/notes",
+        "notes-db.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com/notes",
         {
           tag: tagInput,
           content: noteInput,
           date: getDateAndTime(),
-        },
-        { headers }
+        }
       );
       const id = result.data.insertId;
       const noteObject = {

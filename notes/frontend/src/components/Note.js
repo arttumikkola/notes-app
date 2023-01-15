@@ -35,12 +35,15 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
       return note.id === editable.id;
     });
     try {
-      axios.put(`http://localhost:8080/notes/${index}`, {
-        tag: tagInput,
-        content: noteInput,
-        date: getDateAndTime(),
-        id: note.id,
-      });
+      axios.put(
+        `notes-db.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com/notes/${index}`,
+        {
+          tag: tagInput,
+          content: noteInput,
+          date: getDateAndTime(),
+          id: note.id,
+        }
+      );
       const notes2 = [...notes];
       notes2[index] = {
         id: note.id,
@@ -64,11 +67,15 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
             return note.id !== id;
           })
         );
-        await axios.delete(`http://localhost:8080/notes/${id}`).then(() => {
-          if (selectedTag !== "All") {
-            setSelectedTag("All");
-          }
-        });
+        await axios
+          .delete(
+            `notes-db.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com/notes/${id}`
+          )
+          .then(() => {
+            if (selectedTag !== "All") {
+              setSelectedTag("All");
+            }
+          });
       } catch (err) {
         console.error(err);
         /* alert("Error deleting the note"); */
