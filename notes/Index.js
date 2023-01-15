@@ -12,6 +12,8 @@ app.use(bodyParser.json());
 
 const pool = mariadb.createPool(getRDSCredentials());
 
+console.log(getRDSCredentials());
+
 const getConnection = async () => {
   try {
     return await pool.getConnection();
