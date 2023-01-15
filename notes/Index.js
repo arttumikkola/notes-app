@@ -2,6 +2,7 @@ const express = require("express");
 const mariadb = require("mariadb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const getRDSCredentials = require("./GetSecrets");
 
 require("dotenv").config();
 
@@ -9,17 +10,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const server = app.listen(8080, () => {
-  console.log(`Server listening on port ${server.address().port}`);
-});
-
-const pool = mariadb.createPool({
-  host: process.env.REACT_APP_HOST,
-  user: process.env.REACT_APP_USER,
-  password: process.env.REACT_APP_PASSWORD,
-  database: process.env.REACT_APP_DB,
-  connectionLimit: 5,
-});
+const pool = mariadb.createPool(getRDSCredentials());
 
 const getConnection = async () => {
   try {
