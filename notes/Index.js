@@ -12,8 +12,6 @@ app.use(bodyParser.json());
 
 const pool = mariadb.createPool(getRDSCredentials());
 
-console.log(getRDSCredentials());
-
 const getConnection = async () => {
   try {
     return await pool.getConnection();
@@ -27,6 +25,7 @@ const getConnection = async () => {
 app.get("/notes", async (req, res) => {
   try {
     const connection = await getConnection();
+    console.log(getRDSCredentials());
     const query = `SELECT * FROM notes`;
     const result = await connection.query(query);
     connection.end();

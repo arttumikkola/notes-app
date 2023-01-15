@@ -6,6 +6,7 @@ require("dotenv").config();
 const getRDSCredentials = async () => {
   try {
     const secretName = process.env.SECRET_NAME;
+    console.log("Secret name: ", secretName);
     const secretValue = await secretsManager
       .getSecretValue({ SecretId: secretName })
       .promise();
