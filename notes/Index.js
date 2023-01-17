@@ -10,7 +10,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const pool = mariadb.createPool(getRDSCredentials());
+const credentials = await getRDSCredentials();
+const pool = mariadb.createPool(credentials);
 
 const getConnection = async () => {
   try {
