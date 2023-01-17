@@ -1,12 +1,10 @@
-import {
+const {
   SecretsManagerClient,
   GetSecretValueCommand,
-} from "@aws-sdk/client-secrets-manager";
-import dotenv from "dotenv";
+} = require("@aws-sdk/client-secrets-manager");
+require("dotenv").config();
 
-getRDSCredentials = async () => {
-  dotenv.config();
-
+const getRDSCredentials = async () => {
   const secret_name = process.env.SECRET_NAME;
 
   try {
@@ -19,6 +17,7 @@ getRDSCredentials = async () => {
         VersionStage: "AWSCURRENT",
       })
     );
+    console.log(response);
     const { password } = JSON.parse(response.SecretString);
     return {
       host: "notes-db.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com",
@@ -32,4 +31,4 @@ getRDSCredentials = async () => {
     throw err;
   }
 };
-export default getRDSCredentials;
+module.exports = getRDSCredentials;

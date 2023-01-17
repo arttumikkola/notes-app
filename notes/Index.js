@@ -10,10 +10,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const credentials = await getRDSCredentials();
-const pool = mariadb.createPool(credentials);
-
 const getConnection = async () => {
+  const credentials = await getRDSCredentials();
+  const pool = mariadb.createPool(credentials);
+  console.log(credentials);
   try {
     return await pool.getConnection();
   } catch (err) {
@@ -21,7 +21,7 @@ const getConnection = async () => {
     throw err;
   }
 };
-
+getConnection();
 // Get all notes
 app.get("/notes", async (req, res) => {
   try {
