@@ -2,7 +2,6 @@ const express = require("express");
 const mariadb = require("mariadb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-/* const getRDSCredentials = require("./GetSecrets"); */
 
 require("dotenv").config();
 
@@ -11,29 +10,33 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const getConnection = async () => {
-  /* const credentials = await getRDSCredentials(); */
   const pool = mariadb.createPool({
-    host: "notes-db.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com",
+    host: "awseb-e-hzdwdezvbj-stack-awsebrdsdatabase-kouv9b2e3qjs.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com",
     user: "admin",
     port: "3306",
-    password: "ypI23r2*W5S|Ueiqe1vNSF3+}8$j",
-    database: "notes-db",
+    password: "perkele1",
+    database: "notes",
     connectionLimit: 5,
+    /* host: process.env.RDS_HOSTNAME,
+    user: process.env.RDS_USERNAME,
+    port: process.env.RDS_PORT,
+    password: process.env.RDS_PASSWORD,
+    database: process.env.RDS_DB_NAME,
+    connectionLimit: 5, */
   });
-  /* console.log(credentials); */
   try {
-    return await pool.getConnection();
+    await pool.getConnection();
   } catch (err) {
     console.error("Error getting connection from pool: ", err);
     throw err;
   }
 };
 getConnection();
+
 // Get all notes
 app.get("/notes", async (req, res) => {
   try {
     const connection = await getConnection();
-    console.log(getRDSCredentials());
     const query = `SELECT * FROM notes`;
     const result = await connection.query(query);
     connection.end();
@@ -100,3 +103,5 @@ app.delete("/notes/:id", async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 });
+
+app.listen(process.env.PORT);
