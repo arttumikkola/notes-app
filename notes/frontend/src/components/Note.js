@@ -36,7 +36,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
     });
     try {
       axios.put(
-        `http://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes/${index}`,
+        `https://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes/${index}`,
         {
           tag: tagInput,
           content: noteInput,
@@ -69,7 +69,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
         );
         await axios
           .delete(
-            `http://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes/${id}`
+            `https://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes/${id}`
           )
           .then(() => {
             if (selectedTag !== "All") {

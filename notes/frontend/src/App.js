@@ -12,7 +12,7 @@ const App = () => {
     const fetch = async () => {
       try {
         const { data } = await axios.get(
-          "http://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes"
+          "https://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes"
         );
         setNotes(data);
       } catch (e) {
