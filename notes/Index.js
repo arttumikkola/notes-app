@@ -2,7 +2,7 @@ const express = require("express");
 const mariadb = require("mariadb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const getRDSCredentials = require("./GetSecrets");
+/* const getRDSCredentials = require("./GetSecrets"); */
 
 require("dotenv").config();
 
@@ -11,9 +11,16 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const getConnection = async () => {
-  const credentials = await getRDSCredentials();
-  const pool = mariadb.createPool(credentials);
-  console.log(credentials);
+  /* const credentials = await getRDSCredentials(); */
+  const pool = mariadb.createPool({
+    host: "notes-db.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com",
+    user: "admin",
+    port: "3306",
+    password: "ypI23r2*W5S|Ueiqe1vNSF3+}8$j",
+    database: "notes-db",
+    connectionLimit: 5,
+  });
+  /* console.log(credentials); */
   try {
     return await pool.getConnection();
   } catch (err) {
