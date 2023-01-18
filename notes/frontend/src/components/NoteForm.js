@@ -35,7 +35,7 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
         return;
       }
       const result = await axios.post(
-        "notes-db.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com/notes",
+        "http://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes",
         {
           tag: tagInput,
           content: noteInput,

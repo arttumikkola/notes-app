@@ -11,7 +11,9 @@ const App = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const { data } = await axios.get("/notes");
+        const { data } = await axios.get(
+          "http://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes"
+        );
         setNotes(data);
       } catch (e) {
         console.log(e);
