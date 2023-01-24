@@ -34,14 +34,11 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
         alert("Don't insert empty values");
         return;
       }
-      const result = await axios.post(
-        "https://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes",
-        {
-          tag: tagInput,
-          content: noteInput,
-          date: getDateAndTime(),
-        }
-      );
+      const result = await axios.post("www.notesapp.tech/notes", {
+        tag: tagInput,
+        content: noteInput,
+        date: getDateAndTime(),
+      });
       const id = result.data.insertId;
       const noteObject = {
         id: id,

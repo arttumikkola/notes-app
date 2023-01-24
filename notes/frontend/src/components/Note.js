@@ -35,15 +35,12 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
       return note.id === editable.id;
     });
     try {
-      axios.put(
-        `https://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes/${index}`,
-        {
-          tag: tagInput,
-          content: noteInput,
-          date: getDateAndTime(),
-          id: note.id,
-        }
-      );
+      axios.put(`www.notesapp.tech/notes/${index}`, {
+        tag: tagInput,
+        content: noteInput,
+        date: getDateAndTime(),
+        id: note.id,
+      });
       const notes2 = [...notes];
       notes2[index] = {
         id: note.id,
@@ -67,15 +64,11 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
             return note.id !== id;
           })
         );
-        await axios
-          .delete(
-            `https://notes-env.eba-gusmwfme.eu-north-1.elasticbeanstalk.com/notes/${id}`
-          )
-          .then(() => {
-            if (selectedTag !== "All") {
-              setSelectedTag("All");
-            }
-          });
+        await axios.delete(`www.notesapp.tech/notes/${id}`).then(() => {
+          if (selectedTag !== "All") {
+            setSelectedTag("All");
+          }
+        });
       } catch (err) {
         console.error(err);
         /* alert("Error deleting the note"); */
