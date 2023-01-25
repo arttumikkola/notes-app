@@ -11,21 +11,15 @@ app.use(bodyParser.json());
 
 const getConnection = async () => {
   const pool = mariadb.createPool({
-    host: "awseb-e-hzdwdezvbj-stack-awsebrdsdatabase-kouv9b2e3qjs.co8qqnhkzpn5.eu-north-1.rds.amazonaws.com",
-    user: "admin",
-    port: "3306",
-    password: "perkele1",
-    database: "notes",
-    connectionLimit: 5,
-    /* host: process.env.RDS_HOSTNAME,
+    host: process.env.RDS_HOSTNAME,
     user: process.env.RDS_USERNAME,
     port: process.env.RDS_PORT,
     password: process.env.RDS_PASSWORD,
     database: process.env.RDS_DB_NAME,
-    connectionLimit: 5, */
+    connectionLimit: 5,
   });
   try {
-    await pool.getConnection();
+    return await pool.getConnection();
   } catch (err) {
     console.error("Error getting connection from pool: ", err);
     throw err;
