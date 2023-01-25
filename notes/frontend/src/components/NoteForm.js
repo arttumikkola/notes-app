@@ -34,7 +34,7 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
         alert("Don't insert empty values");
         return;
       }
-      const result = await axios.post(" /notes", {
+      const result = await axios.post("https://notesapp.tech/notes", {
         tag: tagInput,
         content: noteInput,
         date: getDateAndTime(),
