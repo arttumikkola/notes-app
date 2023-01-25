@@ -15,18 +15,6 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
   const [tagInput, setTagInput] = useState("");
   const [sort, setSort] = useState(false);
 
-  const getDateAndTime = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1; // January is 0
-    const day = date.getDate();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-
-    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
-  };
-
   const addNote = async (e) => {
     e.preventDefault();
     try {
@@ -37,14 +25,14 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
       const result = await axios.post("https://notesapp.tech/notes", {
         tag: tagInput,
         content: noteInput,
-        date: getDateAndTime(),
+        date: new Date().toISOString(),
       });
       const id = result.data.insertId;
       const noteObject = {
         id: id,
         tag: tagInput,
         content: noteInput,
-        date: getDateAndTime(),
+        date: new Date().toISOString(),
       };
       setNotes(notes.concat(noteObject));
       setNoteInput("");
