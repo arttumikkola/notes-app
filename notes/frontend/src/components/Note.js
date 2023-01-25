@@ -23,7 +23,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
   };
 
   const formatDate = (date) => {
-    return moment(date).format("Do.MM.YYYY hh.mm.ss");
+    return moment(date).format("D.MM.YYYY hh.mm.ss");
   };
 
   const editNote = (note) => {
