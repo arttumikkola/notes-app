@@ -23,7 +23,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
   };
 
   const formatDate = (date) => {
-    return moment(date).format("YYYY/MM/DD HH:mm:ss");
+    return moment(date).format("Do.MM.YYYY hh.mm.ss");
   };
 
   const editNote = (note) => {
@@ -85,7 +85,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
       >
         <p className="noteContent">{note.content}</p>
         <div className="date">
-          <p className="noteDate">{/* formatDate(note.date) */ note.date}</p>
+          <p className="noteDate">{formatDate(note.date)}</p>
           <div>
             <IconButton
               onClick={() => setEdit(true)}
