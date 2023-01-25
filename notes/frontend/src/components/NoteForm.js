@@ -9,6 +9,7 @@ import DragableIcon from "@rsuite/icons/Dragable";
 import axios from "axios";
 import "../App.css";
 import "rsuite/dist/rsuite.min.css";
+import moment from "moment";
 
 const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
   const [noteInput, setNoteInput] = useState("");
@@ -25,14 +26,14 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
       const result = await axios.post("https://notesapp.tech/notes", {
         tag: tagInput,
         content: noteInput,
-        date: new Date().toISOString(),
+        date: moment(new Date()).format("D.MM.YYYY hh.mm.ss"),
       });
       const id = result.data.insertId;
       const noteObject = {
         id: id,
         tag: tagInput,
         content: noteInput,
-        date: new Date().toISOString(),
+        date: moment(new Date()).format("D.MM.YYYY hh.mm.ss"),
       };
       setNotes(notes.concat(noteObject));
       setNoteInput("");
