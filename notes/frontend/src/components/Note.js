@@ -85,7 +85,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
       >
         <p className="noteContent">{note.content}</p>
         <div className="date">
-          <p className="noteDate">{formatDate(note.date)}</p>
+          <p className="noteDate">{/* formatDate(note.date) */ note.date}</p>
           <div>
             <IconButton
               onClick={() => setEdit(true)}
