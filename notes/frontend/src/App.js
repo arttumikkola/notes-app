@@ -11,7 +11,7 @@ const App = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const { data } = await axios.get("notesapp.tech/notes");
+        const { data } = await axios.get("/notes");
         setNotes(data);
       } catch (e) {
         console.log(e);

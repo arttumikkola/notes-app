@@ -35,7 +35,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
       return note.id === editable.id;
     });
     try {
-      axios.put(`notesapp.tech/notes/${index}`, {
+      axios.put(`/notes/${index}`, {
         tag: tagInput,
         content: noteInput,
         date: getDateAndTime(),
@@ -64,7 +64,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
             return note.id !== id;
           })
         );
-        await axios.delete(`notesapp.tech/notes/${id}`).then(() => {
+        await axios.delete(`/notes/${id}`).then(() => {
           if (selectedTag !== "All") {
             setSelectedTag("All");
           }
