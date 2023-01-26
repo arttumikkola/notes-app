@@ -4,14 +4,13 @@
   "description": "",
   "main": "Index.js",
   "scripts": {
-    "start": "nodemon Index.js",
+    "start": "node Index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon Index.js"
+    "dev": "node Index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1295.0",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
