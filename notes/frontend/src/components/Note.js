@@ -10,18 +10,6 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
   const [tagInput, setTagInput] = useState(note.tag);
   const [noteInput, setNoteInput] = useState(note.content);
 
-  const getDateAndTime = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1; // January is 0
-    const day = date.getDate();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-
-    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
-  };
-
   const formatDate = (date) => {
     return moment(date).format("D.MM.YYYY HH.mm.ss");
   };
@@ -36,17 +24,17 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
     });
     try {
       axios.put(`https://notesapp.tech/notes/${index}`, {
+        id: note.id,
         tag: tagInput,
         content: noteInput,
-        date: getDateAndTime(),
-        id: note.id,
+        date: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
       });
       const notes2 = [...notes];
       notes2[index] = {
         id: note.id,
         content: noteInput,
         tag: tagInput,
-        date: getDateAndTime(),
+        date: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
       };
       setNotes(notes2);
       setEdit(false);
