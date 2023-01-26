@@ -5,3 +5,5 @@ with the tags you've given to them.
 You can try the app at https://main.d1l80yr06bwvjg.amplifyapp.com
 
 The frontend of the app is hosted on AWS Amplify and the backend on AWS Elastic Beanstalk.
+
+Next step for the project is to add authentication, so every user could have their own notes.
