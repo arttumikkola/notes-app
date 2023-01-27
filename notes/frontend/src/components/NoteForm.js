@@ -16,6 +16,10 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
   const [tagInput, setTagInput] = useState("");
   const [sort, setSort] = useState(false);
 
+  const formatDate = (date) => {
+    return moment(date).format("D.MM.YYYY HH.mm.ss");
+  };
+
   const addNote = async (e) => {
     e.preventDefault();
     try {
@@ -26,14 +30,14 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
       const result = await axios.post("https://notesapp.tech/notes", {
         tag: tagInput,
         content: noteInput,
-        date: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        date: new Date(),
       });
       const id = result.data.insertId;
       const noteObject = {
         id: id,
         tag: tagInput,
         content: noteInput,
-        date: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        date: formatDate(new Date()),
       };
       setNotes(notes.concat(noteObject));
       setNoteInput("");
