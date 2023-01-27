@@ -27,14 +27,14 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
         id: note.id,
         tag: tagInput,
         content: noteInput,
-        date: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
+        date: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       });
       const notes2 = [...notes];
       notes2[index] = {
         id: note.id,
         content: noteInput,
         tag: tagInput,
-        date: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
+        date: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       };
       setNotes(notes2);
       setEdit(false);

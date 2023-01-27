@@ -26,14 +26,14 @@ const NoteForm = ({ notes, setNotes, selectedTag, setSelectedTag }) => {
       const result = await axios.post("https://notesapp.tech/notes", {
         tag: tagInput,
         content: noteInput,
-        date: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
+        date: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       });
       const id = result.data.insertId;
       const noteObject = {
         id: id,
         tag: tagInput,
         content: noteInput,
-        date: moment(new Date()).format("YYYY-MM-DD hh:mm:ss"),
+        date: moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
       };
       setNotes(notes.concat(noteObject));
       setNoteInput("");
