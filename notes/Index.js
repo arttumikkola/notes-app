@@ -31,7 +31,7 @@ getConnection();
 app.get("/notes", async (req, res) => {
   try {
     const connection = await getConnection();
-    const query = /* `SELECT id, tag, content, convert_tz(date, '+00:00', '+10:00') As date from notes`; */ `SELECT id, tag, content, date from notes`;
+    const query = `SELECT id, tag, content, date from notes`;
     const result = await connection.query(query);
     connection.end();
     if (result.length === 0) {
