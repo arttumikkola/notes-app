@@ -34,7 +34,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
         id: note.id,
         content: noteInput,
         tag: tagInput,
-        date: formatDate(new Date()),
+        date: new Date(),
       };
       setNotes(notes2);
       setEdit(false);
