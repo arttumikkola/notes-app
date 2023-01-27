@@ -11,7 +11,7 @@ const Note = ({ note, notes, setNotes, selectedTag, setSelectedTag }) => {
   const [noteInput, setNoteInput] = useState(note.content);
 
   const formatDate = (date) => {
-    return moment(date).format("D.MM.YYYY HH.mm.ss");
+    return moment(date).utc().format("D.MM.YYYY HH.mm.ss");
   };
 
   const editNote = (note) => {
